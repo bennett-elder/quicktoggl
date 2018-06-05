@@ -3,3 +3,7 @@
 Create an Environment variable named TOGGL_COM_API_KEY with your toggl.com API Key. 
 
 Each user in Toggl.com has an API token. They can find it under "My Profile" in their Toggl account.
+
+If you have an issue retrieving the API token from the environment variable when debugging locally,
+it is recommended that you close Visual Studio and reopen it:
+https://stackoverflow.com/questions/12754884/environment-getenvironmentvariable-wont-find-variable-value
