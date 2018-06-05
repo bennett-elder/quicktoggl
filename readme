@@ -1,0 +1,5 @@
+## Configuring the App
+
+Create an Environment variable named TOGGL_COM_API_KEY with your toggl.com API Key. 
+
+Each user in Toggl.com has an API token. They can find it under "My Profile" in their Toggl account.
