@@ -54,17 +54,26 @@
   <ItemGroup>
     <Compile Include="ButtonOption.cs" />
     <Compile Include="ButtonOptionList.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetTogglAPIKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetTogglAPIKey.Designer.cs">
+      <DependentUpon>frmSetTogglAPIKey.cs</DependentUpon>
     </Compile>
     <Compile Include="InteractWithToggl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetTogglAPIKey.resx">
+      <DependentUpon>frmSetTogglAPIKey.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
