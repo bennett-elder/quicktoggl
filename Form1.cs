@@ -63,6 +63,11 @@ namespace TogglPlus
                 var newTaskName = input.Length > 0 ? $"{matchingButtonDefn.Text} {input}" : matchingButtonDefn.Text;
 
                 iwt.StopCurrentTask();
+                if (matchingButtonDefn.Text == "Stop" && matchingButtonDefn.Project == "")
+                {
+                    // this is the stop button
+                    return;
+                }
                 iwt.StartNewTask(newTaskName, matchingButtonDefn.Project);
             }
         }

@@ -120,6 +120,13 @@ namespace TogglPlus
                 Text = "Building docs",
                 Project = "Common"
             });
+            Buttons.Add(new ButtonOption()
+            {
+                BackColor = Color.Red,
+                RequiresInput = false,
+                Text = "Stop",
+                Project = ""
+            });
         }
     }
 }
