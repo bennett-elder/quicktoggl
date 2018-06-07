@@ -47,7 +47,7 @@ namespace QuickToggl
 
         private bool VerifyWeHaveAnAPIKey()
         {
-            string key = ""; // Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User);
+            string key = Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User);
             if (key == null || key.Trim().Length == 0)
             {
                 var setKeyForm = new frmSetTogglAPIKey();
