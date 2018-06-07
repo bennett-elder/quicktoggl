@@ -70,21 +70,19 @@ namespace QuickToggl
             {
                 string input = "";
 
-                if (matchingButtonDefn.RequiresInput)
+                if (matchingButtonDefn.RecommendsInput || matchingButtonDefn.RequiresInput)
                 {
-                    while (input.Length == 0)
+                    string prompt =
+                        $"Task type {matchingButtonDefn.Text} {(matchingButtonDefn.RequiresInput ? "REQUIRES" : "RECOMMENDS")} input:";
+                    string title = matchingButtonDefn.RequiresInput ? "REQUIRED input" : "RECOMMENDED input";
+                    var inputForm = new frmInputRequest(prompt, "", title, matchingButtonDefn.RequiresInput);
+                    inputForm.ShowDialog();
+                    if (inputForm.DialogResult == DialogResult.Cancel)
                     {
-                        input = Microsoft.VisualBasic.Interaction.InputBox($"Task type {matchingButtonDefn.Text} REQUIRES input:",
-                            "Required Input",
-                            input);
+                        return;
                     }
-                }
-                else if (matchingButtonDefn.RecommendsInput)
-                {
-                    input = Microsoft.VisualBasic.Interaction.InputBox($"Task type {matchingButtonDefn.Text} RECOMMENDS input:",
-                        "Recommended Input",
-                        input);
-                    
+
+                    input = inputForm.TextResult;
                 }
 
                 var newTaskName = input.Length > 0 ? $"{matchingButtonDefn.Text} {input}" : matchingButtonDefn.Text;
