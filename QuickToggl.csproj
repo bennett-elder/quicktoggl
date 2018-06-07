@@ -72,6 +72,7 @@
       <DependentUpon>frmSetTogglAPIKey.cs</DependentUpon>
     </Compile>
     <Compile Include="InteractWithToggl.cs" />
+    <Compile Include="KeyVerification.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmInputRequest.resx">

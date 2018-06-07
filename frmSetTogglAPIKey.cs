@@ -32,7 +32,7 @@ namespace QuickToggl
             try
             {
                 string key = txtKey.Text.Trim();
-                VerifyKeyAndSaveIt(key);
+                KeyVerification.VerifyKeyAndSaveIt(key);
                 lblSaveFeedback.ForeColor = Color.Green;
                 lblSaveFeedback.Text = "Key saved.";
                 isThereAKeySaved = true;
@@ -44,45 +44,12 @@ namespace QuickToggl
             }
         }
 
-        private static void VerifyKeyAndSaveIt(string key)
-        {
-            var toggl = new Toggl.Api.TogglClient(key);
-            var request = toggl.Users.GetCurrent();
-            if (request.IsCompleted)
-            {
-                if (request.IsFaulted)
-                {
-                    if (request.Exception.InnerExceptions != null)
-                    {
-                        if (request.Exception.InnerException.Message ==
-                            "The remote server returned an error: (403) Forbidden.")
-                        {
-                            throw new Exception("Bad API key");
-                        }
-
-                        throw request.Exception.InnerException;
-                    }
-                    else
-                    {
-                        throw request.Exception;
-                    }
-                }
-
-                Environment.SetEnvironmentVariable("TOGGL_COM_API_KEY", key, EnvironmentVariableTarget.User);
-
-                if (Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User).Length == 0)
-                {
-                    throw new Exception("Blank key stored in environment variable - fill in your key based on what your Toggl.com profile says.");
-                }
-            }
-        }
-
         private void frmSetTogglAPIKey_Load(object sender, EventArgs e)
         {
             try
             {
                 txtKey.Text = Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User);
-                VerifyKeyAndSaveIt(txtKey.Text);
+                KeyVerification.VerifyKeyAndSaveIt(txtKey.Text);
                 lblSaveFeedback.ForeColor = Color.Green;
                 lblSaveFeedback.Text = "Key is verified.";
                 isThereAKeySaved = true;
