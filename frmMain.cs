@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using QuickToggl;
 
-namespace TogglPlus
+namespace QuickToggl
 {
     public partial class frmMain : Form
     {
@@ -47,7 +47,7 @@ namespace TogglPlus
 
         private bool VerifyWeHaveAnAPIKey()
         {
-            string key = Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User);
+            string key = ""; // Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User);
             if (key == null || key.Trim().Length == 0)
             {
                 var setKeyForm = new frmSetTogglAPIKey();

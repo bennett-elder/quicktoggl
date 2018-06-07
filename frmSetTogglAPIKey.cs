@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuickToggl;
 using Environment = System.Environment;
 
 namespace QuickToggl
@@ -26,40 +27,70 @@ namespace QuickToggl
             linkLabel1.LinkVisited = true;
         }
 
-        private void tmrSaveColorFeedback_Tick(object sender, EventArgs e)
-        {
-            tmrSaveColorFeedback.Enabled = false;
-            btnSave.BackColor = DefaultBackColor;
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                Environment.SetEnvironmentVariable("TOGGL_COM_API_KEY", txtKey.Text.Trim(), EnvironmentVariableTarget.User);
-
-                if (Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User).Length == 0)
-                {
-                    throw new Exception("Blank key saved - fill in your key based on what your Toggl.com profile says.");
-                }
-
-                btnSave.BackColor = Color.Green;
-                tmrSaveColorFeedback.Enabled = true;
+                string key = txtKey.Text.Trim();
+                VerifyKeyAndSaveIt(key);
+                lblSaveFeedback.ForeColor = Color.Green;
+                lblSaveFeedback.Text = "Key saved.";
                 isThereAKeySaved = true;
             }
             catch (Exception exception)
             {
-                btnSave.BackColor = Color.Red;
-                tmrSaveColorFeedback.Enabled = true;
+                lblSaveFeedback.ForeColor = Color.Red;
+                lblSaveFeedback.Text = exception.Message;
+            }
+        }
+
+        private static void VerifyKeyAndSaveIt(string key)
+        {
+            var toggl = new Toggl.Api.TogglClient(key);
+            var request = toggl.Users.GetCurrent();
+            if (request.IsCompleted)
+            {
+                if (request.IsFaulted)
+                {
+                    if (request.Exception.InnerExceptions != null)
+                    {
+                        if (request.Exception.InnerException.Message ==
+                            "The remote server returned an error: (403) Forbidden.")
+                        {
+                            throw new Exception("Bad API key");
+                        }
+
+                        throw request.Exception.InnerException;
+                    }
+                    else
+                    {
+                        throw request.Exception;
+                    }
+                }
+
+                Environment.SetEnvironmentVariable("TOGGL_COM_API_KEY", key, EnvironmentVariableTarget.User);
+
+                if (Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User).Length == 0)
+                {
+                    throw new Exception("Blank key stored in environment variable - fill in your key based on what your Toggl.com profile says.");
+                }
             }
         }
 
         private void frmSetTogglAPIKey_Load(object sender, EventArgs e)
         {
-            txtKey.Text = Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User);
-            if (txtKey.Text.Trim().Length > 0)
+            try
             {
+                txtKey.Text = Environment.GetEnvironmentVariable("TOGGL_COM_API_KEY", EnvironmentVariableTarget.User);
+                VerifyKeyAndSaveIt(txtKey.Text);
+                lblSaveFeedback.ForeColor = Color.Green;
+                lblSaveFeedback.Text = "Key is verified.";
                 isThereAKeySaved = true;
+            }
+            catch (Exception exception)
+            {
+                lblSaveFeedback.ForeColor = Color.Red;
+                lblSaveFeedback.Text = "Invalid key or issue saving it.";
             }
         }
 

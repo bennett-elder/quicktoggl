@@ -4,7 +4,7 @@ using System.Linq;
 using Toggl.Api;
 using Toggl.Api.DataObjects;
 
-namespace TogglPlus
+namespace QuickToggl
 {
     class InteractWithToggl
     {
