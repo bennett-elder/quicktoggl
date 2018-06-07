@@ -1,4 +1,4 @@
-﻿namespace TogglPlus
+﻿namespace QuickToggl
 {
     partial class frmMain
     {

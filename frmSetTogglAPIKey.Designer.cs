@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.txtKey = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.tmrSaveColorFeedback = new System.Windows.Forms.Timer(this.components);
+            this.lblSaveFeedback = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -76,7 +75,7 @@
             // 
             this.txtKey.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtKey.Location = new System.Drawing.Point(251, 335);
-            this.txtKey.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtKey.Margin = new System.Windows.Forms.Padding(4);
             this.txtKey.Name = "txtKey";
             this.txtKey.Size = new System.Drawing.Size(376, 26);
             this.txtKey.TabIndex = 1;
@@ -84,7 +83,7 @@
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(635, 333);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(112, 32);
             this.btnSave.TabIndex = 2;
@@ -92,23 +91,27 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // tmrSaveColorFeedback
+            // lblSaveFeedback
             // 
-            this.tmrSaveColorFeedback.Interval = 600;
-            this.tmrSaveColorFeedback.Tick += new System.EventHandler(this.tmrSaveColorFeedback_Tick);
+            this.lblSaveFeedback.Location = new System.Drawing.Point(273, 387);
+            this.lblSaveFeedback.Name = "lblSaveFeedback";
+            this.lblSaveFeedback.Size = new System.Drawing.Size(377, 70);
+            this.lblSaveFeedback.TabIndex = 5;
+            this.lblSaveFeedback.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmSetTogglAPIKey
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 494);
+            this.Controls.Add(this.lblSaveFeedback);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtKey);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmSetTogglAPIKey";
             this.Text = "Set Toggl API Key";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSetTogglAPIKey_FormClosing);
@@ -125,6 +128,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtKey;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Timer tmrSaveColorFeedback;
+        private System.Windows.Forms.Label lblSaveFeedback;
     }
 }
